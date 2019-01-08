@@ -158,6 +158,21 @@ MyDate & MyDate::operator+(int date)
 	// TODO: insert return statement here
 }
 
+MyDate & MyDate::stringToDate(string temp)
+{
+	int pos = 0, pos1;
+	pos1 = temp.find_first_of('/', pos);
+	this->date = stoi(temp.substr(pos, pos1 - pos));
+	pos = pos1 + 1;
+	pos1 = temp.find_first_of('/', pos);
+	this->month = stoi(temp.substr(pos , pos1 - pos));
+	pos = pos1 + 1;
+	pos1 = temp.find_first_of('/', pos );
+	this->year = stoi(temp.substr(pos, pos1 - pos));
+	return *this;
+	// TODO: insert return statement here
+}
+
 
 MyDate::~MyDate()
 {

@@ -24,6 +24,7 @@ public:
 	MyDate dateAfter(int date = 1);
 	MyDate dateBefore(int date = 1);
 	string dayOfWeek();  // What day is today ?
+	MyDate& stringToDate(string temp);
 	MyDate& operator=(const MyDate& md);
 	MyDate& operator+(int date );
 	friend int operator-(MyDate& md1, MyDate& md2);
