@@ -2,10 +2,10 @@
 
 int main()
 {
-	MyDate date(7, 1, 2019);
+	MyDate date(8, 1, 2019);
 	cout << date.countDate() << endl;
-	cout << date + 1;
-	cout << date << endl;
+	cout << date + 12;
+	cout << date.dayOfWeek() << endl;
 	system("pause");
 	return 0;
 }

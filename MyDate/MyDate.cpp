@@ -88,9 +88,9 @@ int MyDate::dateOfMonth(int month,int year)
 int MyDate::countDate()
 {
 	int date = 0;
-	if (this->year >= 2000)
+	if (this->year >= MIN_YEAR)
 	{
-		for (int i = 2000; i < this->year; i++)
+		for (int i = MIN_YEAR; i < this->year; i++)
 		{
 			if (isLeap(i) == true)
 				date += 366;
@@ -108,7 +108,7 @@ int MyDate::countDate()
 MyDate MyDate::dateAfter(int date)
 {
 	MyDate md;
-	md.year = 2000;
+	md.year = MIN_YEAR;
 	md.month = 1;
 	date += this->countDate();
 	while (date > 365)
@@ -129,7 +129,7 @@ MyDate MyDate::dateAfter(int date)
 MyDate MyDate::dateBefore(int date)
 {
 	MyDate md;
-	md.year = 2000;
+	md.year = MIN_YEAR;
 	md.month = 1;
 	date = this->countDate() - date;
 	while (date > 365)
@@ -149,20 +149,10 @@ MyDate MyDate::dateBefore(int date)
 
 string MyDate::dayOfWeek()
 {
-	// 01/01/2000 Saturday => 31/12/1999 Friday
+	// 01/01/1900 Monday => 31/12/1899 Sunday
 	int day = this->countDate() % 7 - 1;
-	switch (day)
-	{
-	case 0:return "Saturday";
-	case 1:return "Sunday";
-	case 2:return "Monday";
-	case 3:return "Tuesday";
-	case 4:return "Wednesday";
-	case 5:return "Thursday";
-	case 6:return "Friday";
-	default:
-		break;
-	}
+	string DAY[7] = { "Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday" };
+	return DAY[day];
 }
 
 

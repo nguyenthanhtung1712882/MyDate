@@ -5,6 +5,8 @@
 #include<string>
 using namespace std;
 
+const int MIN_YEAR = 1900;
+
 class MyDate
 {
 private:
@@ -18,7 +20,7 @@ public:
 	bool isValid();
 	string toString();
 	int dateOfMonth(int month,int year);
-	int countDate();    // so voi 31/12/2000
+	int countDate();    // so voi 31/12/1899
 	MyDate dateAfter(int date = 1);
 	MyDate dateBefore(int date = 1);
 	string dayOfWeek();  // What day is today ?
