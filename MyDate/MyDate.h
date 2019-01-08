@@ -17,9 +17,9 @@ public:
 	MyDate();
 	MyDate(int Date, int Month, int Year) :date(Date), month(Month), year(Year) {}
 	
+	int dateOfMonth(int month, int year);
 	bool isValid();
 	string toString();
-	int dateOfMonth(int month,int year);
 	int countDate();    // so voi 31/12/1899
 	MyDate dateAfter(int date = 1);
 	MyDate dateBefore(int date = 1);

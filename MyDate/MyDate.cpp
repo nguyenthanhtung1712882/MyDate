@@ -19,50 +19,7 @@ bool isLeap(int year)
 		return true;
 }
 
-bool MyDate::isValid()
-{ 
-	if (this->year<0 || this->year>INT_MAX)
-		return false;
-	if (this->month < 1 || this->month>12)
-		return false;
-	if (this->date < 1 || this->date>31)
-		return false;
-	switch (this->month)
-	{
-	case 1:return true;
-	case 2:
-		if (isLeap(this->year) == true)return this->date <= 29;
-		else return this->date <= 28;
-	case 3:return true;
-	case 4:return this->date < 31;
-	case 5:return true;
-	case 6:return this->date < 31;
-	case 7:return true;
-	case 8:return true;
-	case 9:return this->date < 31;
-	case 10:return true;
-	case 11:return this->date < 31;
-	case 12:return true;
-	default:
-		break;
-	}
-	return false;
-}
-
-string MyDate::toString()
-{
-	string stringDate;
-	if (this->date < 10)stringDate.append("0");
-	stringDate.append(to_string(this->date));
-	stringDate.append("/");
-	if (this->month < 10)stringDate.append("0");
-	stringDate.append(to_string(this->month));
-	stringDate.append("/");
-	stringDate.append(to_string(this->year));
-	return stringDate;
-}
-
-int MyDate::dateOfMonth(int month,int year)
+int MyDate::dateOfMonth(int month, int year)
 {
 	switch (month)
 	{
@@ -84,6 +41,33 @@ int MyDate::dateOfMonth(int month,int year)
 		break;
 	}
 }
+
+
+bool MyDate::isValid()
+{
+	if (this->year<0 || this->year>INT_MAX)
+		return false;
+	if (this->month < 1 || this->month>12)
+		return false;
+	if (this->date < 1 || this->date>this->dateOfMonth(this->month, this->year))
+		return false;
+	return true;
+}
+
+string MyDate::toString()
+{
+	string stringDate;
+	if (this->date < 10)stringDate.append("0");
+	stringDate.append(to_string(this->date));
+	stringDate.append("/");
+	if (this->month < 10)stringDate.append("0");
+	stringDate.append(to_string(this->month));
+	stringDate.append("/");
+	stringDate.append(to_string(this->year));
+	return stringDate;
+}
+
+
 
 int MyDate::countDate()
 {
@@ -168,8 +152,9 @@ MyDate & MyDate::operator=(const MyDate & md)
 
 MyDate & MyDate::operator+(int date)
 {
-	*this = this->dateAfter(date);
-	return *this;
+	MyDate md;
+	md = this->dateAfter(date);
+	return md;
 	// TODO: insert return statement here
 }
 
@@ -197,12 +182,9 @@ ostream & operator<<(ostream & outDev, MyDate md)
 istream & operator>>(istream & inDev, MyDate & md)
 {
 	do {
-		cout << "Nhap ngay : ";
-		inDev >> md.date;
-		cout << "Nhap thang : ";
-		inDev >> md.month;
-		cout << "Nhap nam : ";
-		inDev >> md.year;
+		cout << "Nhap theo dang dd/mm/yyyy : ";
+		char ch;
+		inDev >> md.date >> ch >> md.month >> ch >> md.year;
 		if (md.isValid() == true)break;
 		else cout << "Thoi gian khong hop le. Nhap lai." << endl;
 	} while (1);
